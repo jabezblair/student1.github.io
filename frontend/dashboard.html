@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <h2>Upload Resume</h2>
+
+  <form action="http://127.0.0.1:5000/upload" method="post" enctype="multipart/form-data">
+    <input type="file" name="resume" required>
+    <button>Analyze Resume</button>
+  </form>
+
+  <canvas id="chart" width="400"></canvas>
+
+  <script>
+    fetch("http://127.0.0.1:5000/chart-data")
+      .then(res => res.json())
+      .then(data => {
+        new Chart(document.getElementById("chart"), {
+          type: 'bar',
+          data: {
+            labels: data.labels,
+            datasets: [{
+              label: "Resume Match %",
+              data: data.values
+            }]
+          }
+        });
+      });
+  </script>
+</body>
+</html>

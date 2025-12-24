@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h2>Admin Dashboard</h2>
+  <div id="data"></div>
+
+  <script>
+    fetch("http://127.0.0.1:5000/admin-data")
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("data").innerHTML = JSON.stringify(data);
+      });
+  </script>
+</body>
+</html>
